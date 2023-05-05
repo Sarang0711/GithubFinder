@@ -2,9 +2,6 @@ import { createContext, useReducer } from "react";
 import GithubReducer from "./GithubReducer";
 
 const GithubContext = createContext();
-const GITHUB_API_TOKEN = process.env.REACT_APP_API_TOKEN;
-
-
 
 // ? children prop is used to wrap child component that need to access the context value
 export const GithubProvider = ({children}) => {
