@@ -1,10 +1,10 @@
-import { useEffect, useContext } from 'react';
+import {useContext } from 'react';
 import CircleLoader from 'react-spinners/CircleLoader';
 import UserItem from './UserItem';
 import GithubContext from '../../context/github/GithubContext';
 
 function UserResult() {
-    const {users, loading, searchUsers} = useContext(GithubContext);
+    const {users, loading} = useContext(GithubContext);
     //? We are using useContext hook instead of taking attributes from props
     //? createContext in GithubContext.js and useContext where we want to use attributes
     if(!loading) {         

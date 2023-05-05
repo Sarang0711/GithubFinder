@@ -12,7 +12,7 @@ function NotFound() {
             <FaHome className='mr-2'/>
             Back to Home
           </Link>
-          //? Here we are re-routing to home page from not found page
+          {/* //? Here we are re-routing to home page from not found page */}
         {/* </Link> */}
       </div>
     </div>
