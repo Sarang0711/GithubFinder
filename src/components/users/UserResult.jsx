@@ -9,7 +9,7 @@ function UserResult() {
     //? createContext in GithubContext.js and useContext where we want to use attributes
     if(!loading) {         
         return (
-            (users.length != 0) && (
+            (users.length !== 0) && (
                 <div className='grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2'>
                 {users.map((user)=> {
                     return <UserItem user={user} key={user.id}/>

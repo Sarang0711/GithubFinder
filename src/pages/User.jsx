@@ -1,22 +1,28 @@
 import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import {FaCodepen, FaStore, FaUserFriends, FaUsers} from 'react-icons/fa';
+import {FaCodepen, FaUserFriends, FaUsers} from 'react-icons/fa';
 import CircleLoader from "react-spinners/CircleLoader";
 import GithubContext from "../context/github/GithubContext";
 import RepoList from "../components/repos/RepoList";
+import { getUser, getUserRepos } from "../context/github/GithubActions";
 
 
 function User() {
 
-  const {user, loading, getUser, repos, getUserRepos} = useContext(GithubContext);
-  // console.log(repos)
+  const {user, loading, dispatch, repos} = useContext(GithubContext);
   const params = useParams();
-  // console.log(user);
   useEffect(()=> {
-    getUser(params.login);
-    getUserRepos(params.login);
-  }, [])
+    dispatch({type: 'SET_LOADING'})
+    const getUserData = async() => {
+      const userData = await getUser(params.login);
+      dispatch({type: 'GET_USER', payload: userData})
+
+      const userRepoData = await getUserRepos(params.login);
+      dispatch({type: 'GET_USER_REPOS', payload: userRepoData});
+    }
+    getUserData();
+  }, [dispatch, params.login]); 
 
   const {
     name,
@@ -26,12 +32,10 @@ function User() {
     bio,
     blog,
     twitter_username,
-    login,
     html_url,
     followers,
     following,
     public_repos,
-    public_gist,
     hireable,
   } = user;
 
@@ -56,7 +60,6 @@ function User() {
                 <h2 className="card-title mb-0">
                   {name}
                 </h2>
-                {/* <p className="p-0 flex login-p  items-end leading-normal">{login}</p>  */}
               </div>
             </div>
           </div>
