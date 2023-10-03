@@ -11,8 +11,8 @@ export const searchUsers = async (text) => {
       },
   });
   //? items is an object of the response from server. we are interested only in items object
-  const {items} = await response.json();
-  return items;
+  const res = await response.json();
+  return res.items;
 }
 
 export const getUser = async (login) => {
